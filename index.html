@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Camera Preview</title>
+    <style>
+      #video-container {
+        margin: auto;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      #video-element {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello</h1>
+    <div id="video-container">
+      <video id="video-element" autoplay playsinline></video>
+    </div>
+
+    <script>
+      async function startCamera() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" },
+          });
+          const videoElement = document.getElementById("video-element");
+          videoElement.srcObject = stream;
+        } catch (err) {
+          console.error("Error accessing camera:", err);
+          alert(
+            "Error accessing camera. Please make sure you have granted camera permission."
+          );
+        }
+      }
+
+      startCamera();
+    </script>
+  </body>
+</html>
